@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rhythm Dahal | Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+   body {
+    font-family: 'Inter', sans-serif;
+    background-color: #c1e1c1; /* Matcha color */
+   }
+   /* Style for the hamburger menu icon */
+   .hamburger-icon div {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 5px 0;
+    transition: 0.4s;
+   }
+   /* Transform hamburger to an 'X' when active */
+   .hamburger-icon.active .bar1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+   }
+   .hamburger-icon.active .bar2 {
+    opacity: 0;
+   }
+   .hamburger-icon.active .bar3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+   }
+   /* Style for the dark mode toggle icon */
+   .theme-toggle-icon {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    transition: transform 0.3s ease;
+   }
+   .theme-toggle-icon:hover {
+    transform: scale(1.1);
+   }
+   /* Tailwind dark mode support */
+   .dark body {
+    background-color: #1a202c;
+    color: #e2e8f0;
+   }
+   /* Custom modal styles for general alerts/summaries */
+   .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding-top: 50px;
+   }
+   .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    width: 90%;
+   }
+   .modal-content.dark-mode {
+    background-color: #2d3748;
+    color: #e2e8f0;
+   }
+   .close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+   }
+   .close-button:hover,
+   .close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+   }
+   .modal-content.dark-mode .close-button {
+    color: #ccc;
+   }
+   .modal-content.dark-mode .close-button:hover,
+   .modal-content.dark-mode .close-button:focus {
+    color: white;
+   }
+
+   /* Styles for the tabs */
+   .tab-buttons button {
+    transition: all 0.3s ease;
+   }
+   .tab-buttons button.active {
+    background-color: #e2e8f0;
+    color: #1a202c;
+   }
+   .dark .tab-buttons button.active {
+    background-color: #4a5568;
+    color: #e2e8f0;
+   }
+   .tab-content-item {
+    display: none;
+   }
+   .tab-content-item.active {
+    display: block;
+   }
+  </style>
+ </head>
+ <body class="text-gray-800 transition-colors duration-300 dark:bg-slate-900 dark:text-gray-200">
+
+  <header class="bg-slate-100 shadow-sm sticky top-0 z-50 transition-colors duration-300 dark:bg-slate-800">
+   <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center space-x-2">
+     <a href="#" class="text-2xl font-bold text-gray-900 hover:text-gray-600 transition-colors dark:text-white dark:hover:text-blue-400">Rhythm Dahal</a>
+     <a href="https://www.linkedin.com/in/rhythm-dahal-6b667527b/" target="_blank" class="text-gray-600 hover:text-blue-600 transition-colors dark:text-gray-300 dark:hover:text-blue-400" title="LinkedIn">
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.381 1.11-2.5 2.48-2.5s2.48 1.119 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.913-7.534-10.941-3.447v-2.318h-4.957v16h4.988z"/>
+      </svg>
+     </a>
+    </div>
+
+    <div class="flex items-center space-x-4">
+     <ul class="hidden md:flex space-x-6">
+      <li><a href="#about" class="text-gray-700 hover:text-gray-900 transition-colors dark:text-gray-300 dark:hover:text-white">About</a></li>
+      <li><a href="#projects" class="text-gray-700 hover:text-gray-900 transition-colors dark:text-gray-300 dark:hover:text-white">Projects</a></li>
+      <li><a href="#contact" class="text-gray-700 hover:text-gray-900 transition-colors dark:text-gray-300 dark:hover:text-white">Contact</a></li>
+     </ul>
+
+     <button id="theme-toggle" class="p-2 rounded-md focus:outline-none">
+      <svg id="moon-icon" class="theme-toggle-icon text-gray-700 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+      <svg id="sun-icon" class="theme-toggle-icon text-white hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+       <circle cx="12" cy="12" r="5"></circle>
+       <line x1="12" y1="1" x2="12" y2="3"></line>
+       <line x1="12" y1="21" x2="12" y2="23"></line>
+       <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+       <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+       <line x1="1" y1="12" x2="3" y2="12"></line>
+       <line x1="21" y1="12" x2="23" y2="12"></line>
+       <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+       <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+     </button>
+
+     <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+      <div class="hamburger-icon transition-colors duration-300 dark:bg-white">
+       <div class="bar1 dark:bg-white"></div>
+       <div class="bar2 dark:bg-white"></div>
+       <div class="bar3 dark:bg-white"></div>
+      </div>
+     </button>
+    </div>
+   </nav>
+
+   <div id="mobile-menu" class="hidden md:hidden bg-slate-100 shadow-md transition-colors duration-300 dark:bg-slate-800">
+    <ul class="py-2">
+     <li><a href="#about" class="block px-6 py-2 text-gray-700 hover:bg-slate-200 transition-colors dark:text-gray-300 dark:hover:bg-slate-700">About</a></li>
+     <li><a href="#projects" class="block px-6 py-2 text-gray-700 hover:bg-slate-200 transition-colors dark:text-gray-300 dark:hover:bg-slate-700">Projects</a></li>
+     <li><a href="#contact" class="block px-6 py-2 text-gray-700 hover:bg-slate-200 transition-colors dark:text-gray-300 dark:hover:bg-slate-700">Contact</a></li>
+    </ul>
+   </div>
+  </header>
+
+  <main class="container mx-auto px-6 py-12">
+
+   <section id="about" class="bg-slate-100 rounded-xl shadow-lg p-8 mb-12 transition-colors duration-300 dark:bg-slate-800">
+    <h2 class="text-4xl font-bold text-gray-900 mb-6 dark:text-white">Hello, I'm Rhythm Dahal</h2>
+    <div id="about-content">
+     <p id="about-text" class="text-lg text-gray-600 leading-relaxed mb-4 dark:text-gray-300">
+      I'm a 16-year-old student at Parkview High School with a 3.9 GPA, aspiring to major in AI and ML. My passions lie at the intersection of Artificial Intelligence, Machine Learning, and creative design. I also have a passion for developing websites, like this one, and creating games with AI. Welcome to my little corner of the internet where I share my thoughts, projects, and experiences.
+     </p>
+    </div>
+   </section>
+
+   <div class="tab-container bg-slate-100 rounded-xl shadow-lg p-8 mb-12 transition-colors duration-300 dark:bg-slate-800">
+    <div class="tab-buttons flex space-x-4 mb-8">
+     <button data-tab="courses" class="tab-button active px-4 py-2 rounded-lg font-semibold bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-200">Courses & Academics</button>
+     <button data-tab="leadership" class="tab-button px-4 py-2 rounded-lg font-semibold bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-200">Leadership & Clubs</button>
+     <button data-tab="experience" class="tab-button px-4 py-2 rounded-lg font-semibold bg-gray-200 text-gray-900 dark:bg-gray-700 dark:text-gray-200">Experience</button>
+    </div>
+
+    <div class="tab-content-container">
+     <section id="courses" class="tab-content-item active" data-tab="courses">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6 dark:text-white">Courses & Academics</h2>
+      <p class="text-lg text-gray-600 leading-relaxed mb-4 dark:text-gray-300">
+       As an AP Scholar, I have a strong foundation in a variety of subjects. Here are some of the courses I have taken and am currently taking to deepen my knowledge.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+       <div>
+        <h3 class="text-xl font-semibold mb-2 dark:text-white">Completed AP Courses</h3>
+        <ul class="list-disc list-inside text-gray-600 dark:text-gray-300">
+         <li>AP World History</li>
+         <li>AP Precalculus</li>
+         <li>AP Psychology</li>
+         <li>AP Seminar</li>
+        </ul>
+       </div>
+       <div>
+        <h3 class="text-xl font-semibold mb-2 dark:text-white">Current AP Courses</h3>
+        <ul class="list-disc list-inside text-gray-600 dark:text-gray-300">
+         <li>AP Research</li>
+         <li>AP Lang</li>
+         <li>AP US History</li>
+         <li>AP Computer Science Principles</li>
+         <li>AP Calculus BC</li>
+        </ul>
+       </div>
+      </div>
+     </section>
+
+     <section id="leadership" class="tab-content-item" data-tab="leadership">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6 dark:text-white">Leadership & Clubs</h2>
+      <ul class="list-disc list-inside text-lg text-gray-600 space-y-2 dark:text-gray-300">
+       <li>Founder – HealingTogether (Mental health Awareness program)</li>
+       <li>President – Chess Club</li>
+       <li>Vice President – Letters for Rose</li>
+       <li>Member – TSA (Technology Student Association)</li>
+       <li>Member – Spanish Club</li>
+       <li>Member – Beta Club (National Member)</li>
+       <li>Member – MU Alpha Theta (Math National Honor Society)</li>
+      </ul>
+     </section>
+
+     <section id="experience" class="tab-content-item" data-tab="experience">
+      <h2 class="text-3xl font-bold text-gray-900 mb-8 dark:text-white">Experience</h2>
+      <div id="experience-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+       <div class="bg-slate-50 rounded-xl shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300 dark:bg-slate-900">
+        <h3 class="text-2xl font-semibold mb-2 dark:text-white">Kumon Summer Job</h3>
+        <p class="text-gray-600 mb-4 dark:text-gray-300">I worked as a tutor from June to July, helping students with their academic studies and developing my communication and teaching skills.</p>
+       </div>
+      </div>
+     </section>
+    </div>
+   </div>
+
+   <section id="projects" class="mb-12">
+    <h2 class="text-3xl font-bold text-gray-900 mb-8 dark:text-white">Projects</h2>
+    <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+     <div class="bg-slate-100 rounded-xl shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300 dark:bg-slate-800">
+      <h3 class="text-2xl font-semibold mb-2 dark:text-white">Next-Gen Graphic Design Group</h3>
+      <p class="text-gray-600 mb-4 dark:text-gray-300">I founded and lead this graphic design group on LinkedIn, where we collaborate on projects and share new design trends and techniques.</p>
+      <a href="https://www.linkedin.com/groups/13286096/?highlightedUpdateUrn=urn%3Ali%3AgroupPost%3A13286096-7345460522705731587&q=highlightedFeedForGroups" class="text-blue-600 hover:underline" target="_blank">View Group &rarr;</a>
+     </div>
+     <div class="bg-slate-100 rounded-xl shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300 dark:bg-slate-800">
+      <h3 class="text-2xl font-semibold mb-2 dark:text-white">Real Estate Video Editing</h3>
+      <p class="text-gray-600 mb-4 dark:text-gray-300">I help with video editing and promotion for Virtual Properties Realty, using my design and editing skills to create compelling content.</p>
+      <a href="https://www.facebook.com/share/v/1FgW5xEvKH/" class="text-blue-600 hover:underline" target="_blank">View Example Video &rarr;</a>
+     </div>
+     <div class="bg-slate-100 rounded-xl shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300 dark:bg-slate-800">
+      <h3 class="text-2xl font-semibold mb-2 dark:text-white">Super Simple Game (BETA)</h3>
+      <p class="text-gray-600 mb-4 dark:text-gray-300">A game I created using AI and my own coding skills. This project is currently in progress.</p>
+      <a href="https://rhythm-dahal.github.io/supersimplegame/" target="_blank" class="text-blue-600 hover:underline">Play the Game &rarr;</a>
+     </div>
+    </div>
+   </section>
+
+   <section id="contact" class="bg-slate-100 rounded-xl shadow-lg p-8 dark:bg-slate-800">
+    <h2 class="text-3xl font-bold text-gray-900 mb-6 dark:text-white">Get in Touch</h2>
+    <p class="text-lg text-gray-600 mb-4 dark:text-gray-300">
+     I'm always open to new opportunities and collaborations. Feel free to reach out to me via email or connect with me on social media.
+    </p>
+    <div class="flex items-center space-x-4">
+     <a href="mailto:dahalrhythm5@gmail.com" class="text-blue-600 hover:underline">dahalrhythm5@gmail.com</a>
+     <a href="tel:470-525-0521" class="text-blue-600 hover:underline">470-525-0521</a>
+     <a href="https://www.linkedin.com/in/rhythm-dahal-6b667527b/" target="_blank" class="text-gray-600 hover:text-blue-600 transition-colors dark:text-gray-300 dark:hover:text-blue-400" title="LinkedIn">
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.381 1.11-2.5 2.48-2.5s2.48 1.119 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.913-7.534-10.941-3.447v-2.318h-4.957v16h4.988z"/>
+      </svg>
+     </a>
+    </div>
+   </section>
+
+  </main>
+
+  <footer class="bg-slate-900 text-white py-8 mt-12 transition-colors duration-300">
+   <div class="container mx-auto px-6 text-center">
+    <p>&copy; 2025 Rhythm Dahal. All Rights Reserved.</p>
+   </div>
+  </footer>
+
+  <div id="modal" class="modal">
+   <div class="modal-content bg-slate-100 dark:bg-slate-800">
+    <span class="close-button">&times;</span>
+    <h3 id="modal-title" class="text-2xl font-bold mb-4 dark:text-white"></h3>
+    <p id="modal-text" class="text-gray-800 dark:text-gray-200 whitespace-pre-wrap"></p>
+   </div>
+  </div>
+
+  <script>
+   const menuButton = document.getElementById('mobile-menu-button');
+   const mobileMenu = document.getElementById('mobile-menu');
+   const hamburgerIcon = document.querySelector('.hamburger-icon');
+   const themeToggle = document.getElementById('theme-toggle');
+   const body = document.body;
+
+   // Tab functionality
+   const tabButtons = document.querySelectorAll('.tab-button');
+   const tabContents = document.querySelectorAll('.tab-content-item');
+
+   tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+     // Deactivate all buttons and content
+     tabButtons.forEach(btn => btn.classList.remove('active', 'bg-gray-200', 'text-gray-900', 'dark:bg-gray-700', 'dark:text-gray-200'));
+     tabContents.forEach(content => content.classList.remove('active'));
+
+     // Activate the clicked button
+     button.classList.add('active', 'bg-gray-200', 'text-gray-900', 'dark:bg-gray-700', 'dark:text-gray-200');
+
+     // Show the corresponding content
+     const targetTab = button.getAttribute('data-tab');
+     const targetContent = document.querySelector(`.tab-content-item\[data-tab="${targetTab}"]`);
+     if (targetContent) {
+      targetContent.classList.add('active');
+     }
+    });
+   });
+
+
+   // Event listeners for the mobile menu
+   menuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+    hamburgerIcon.classList.toggle('active');
+   });
+   mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+     mobileMenu.classList.add('hidden');
+     hamburgerIcon.classList.remove('active');
+    });
+   });
+
+   // Theme toggle logic
+   function applyTheme(theme) {
+    if (theme === 'dark') {
+     body.classList.add('dark');
+    } else {
+     body.classList.remove('dark');
+    }
+   }
+   const savedTheme = localStorage.getItem('theme');
+   if (savedTheme) {
+    applyTheme(savedTheme);
+   } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    applyTheme('dark');
+   }
+   themeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark');
+    if (body.classList.contains('dark')) {
+     localStorage.setItem('theme', 'dark');
+    } else {
+     localStorage.setItem('theme', 'light');
+    }
+   });
+  </script>
+  <div class="text-center py-4">Rhythm Dahal 2025</div>
+ </body>
+ </html>
