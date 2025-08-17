@@ -10,108 +10,108 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
    body {
-    font-family: 'Inter', sans-serif;
-    background-color: #c1e1c1; /* Matcha color */
+   font-family: 'Inter', sans-serif;
+   background-color: #c1e1c1; /* Matcha color */
    }
    /* Style for the hamburger menu icon */
    .hamburger-icon div {
-    width: 25px;
-    height: 3px;
-    background-color: #333;
-    margin: 5px 0;
-    transition: 0.4s;
+   width: 25px;
+   height: 3px;
+   background-color: #333;
+   margin: 5px 0;
+   transition: 0.4s;
    }
    /* Transform hamburger to an 'X' when active */
    .hamburger-icon.active .bar1 {
-    transform: rotate(-45deg) translate(-5px, 6px);
+   transform: rotate(-45deg) translate(-5px, 6px);
    }
    .hamburger-icon.active .bar2 {
-    opacity: 0;
+   opacity: 0;
    }
    .hamburger-icon.active .bar3 {
-    transform: rotate(45deg) translate(-5px, -6px);
+   transform: rotate(45deg) translate(-5px, -6px);
    }
    /* Style for the dark mode toggle icon */
    .theme-toggle-icon {
-    cursor: pointer;
-    width: 24px;
-    height: 24px;
-    fill: currentColor;
-    transition: transform 0.3s ease;
+   cursor: pointer;
+   width: 24px;
+   height: 24px;
+   fill: currentColor;
+   transition: transform 0.3s ease;
    }
    .theme-toggle-icon:hover {
-    transform: scale(1.1);
+   transform: scale(1.1);
    }
    /* Tailwind dark mode support */
    .dark body {
-    background-color: #1a202c;
-    color: #e2e8f0;
+   background-color: #1a202c;
+   color: #e2e8f0;
    }
    /* Custom modal styles for general alerts/summaries */
    .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    padding-top: 50px;
+   display: none;
+   position: fixed;
+   z-index: 1000;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   overflow: auto;
+   background-color: rgba(0, 0, 0, 0.4);
+   backdrop-filter: blur(5px);
+   -webkit-backdrop-filter: blur(5px);
+   padding-top: 50px;
    }
    .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 700px;
-    width: 90%;
+   background-color: #fefefe;
+   margin: 15% auto;
+   padding: 20px;
+   border-radius: 10px;
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   max-width: 700px;
+   width: 90%;
    }
    .modal-content.dark-mode {
-    background-color: #2d3748;
-    color: #e2e8f0;
+   background-color: #2d3748;
+   color: #e2e8f0;
    }
    .close-button {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+   color: #aaa;
+   float: right;
+   font-size: 28px;
+   font-weight: bold;
    }
    .close-button:hover,
    .close-button:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+   color: black;
+   text-decoration: none;
+   cursor: pointer;
    }
    .modal-content.dark-mode .close-button {
-    color: #ccc;
+   color: #ccc;
    }
    .modal-content.dark-mode .close-button:hover,
    .modal-content.dark-mode .close-button:focus {
-    color: white;
+   color: white;
    }
 
    /* Styles for the tabs */
    .tab-buttons button {
-    transition: all 0.3s ease;
+   transition: all 0.3s ease;
    }
    .tab-buttons button.active {
-    background-color: #e2e8f0;
-    color: #1a202c;
+   background-color: #e2e8f0;
+   color: #1a202c;
    }
    .dark .tab-buttons button.active {
-    background-color: #4a5568;
-    color: #e2e8f0;
+   background-color: #4a5568;
+   color: #e2e8f0;
    }
    .tab-content-item {
-    display: none;
+   display: none;
    }
    .tab-content-item.active {
-    display: block;
+   display: block;
    }
   </style>
  </head>
@@ -177,9 +177,20 @@
     <h2 class="text-4xl font-bold text-gray-900 mb-6 dark:text-white">Hello, I'm Rhythm Dahal</h2>
     <div id="about-content">
      <p id="about-text" class="text-lg text-gray-600 leading-relaxed mb-4 dark:text-gray-300">
-      I'm a 16-year-old student at Parkview High School with a 3.9 GPA, aspiring to major in AI and ML. My passions lie at the intersection of Artificial Intelligence, Machine Learning, and creative design. I also have a passion for developing websites, like this one, and creating games with AI. Welcome to my little corner of the internet where I share my thoughts, projects, and experiences.
+     I'm a 16-year-old student at Parkview High School with a 3.9 GPA, aspiring to major in AI and ML. My passions lie at the intersection of Artificial Intelligence, Machine Learning, and creative design. I also have a passion for developing websites, like this one, and creating games with AI. Welcome to my little corner of the internet where I share my thoughts, projects, and experiences.
+    
      </p>
     </div>
+   </section>
+   
+   <section id="resume" class="bg-slate-100 rounded-xl shadow-lg p-8 mb-12 transition-colors duration-300 dark:bg-slate-800">
+    <h2 class="text-3xl font-bold text-gray-900 mb-6 dark:text-white">View My Resume Here</h2>
+    <p class="text-lg text-gray-600 leading-relaxed mb-4 dark:text-gray-300">
+     For a detailed overview of my academic achievements, skills, and experience, please view my full resume.
+    </p>
+    <a href="https://docs.google.com/document/d/1pa8BbYL5hewak5EGlc4nz5NjvUs1ecNZv4bE8XdqA4A/edit?usp=sharing" target="_blank" class="text-blue-600 hover:underline text-xl font-semibold">
+     View Resume &rarr;
+    </a>
    </section>
 
    <div class="tab-container bg-slate-100 rounded-xl shadow-lg p-8 mb-12 transition-colors duration-300 dark:bg-slate-800">
